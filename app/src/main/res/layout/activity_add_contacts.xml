@@ -1,8 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
+    <EditText
+        android:id="@+id/nameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_edit_text"
+        android:fontFamily="@font/poppins"
+        android:hint="@string/name"
+        android:imeOptions="actionNext"
+        android:inputType="textPersonName"
+        android:paddingStart="15dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="10dp"
+        android:textColorHint="@color/gray_700" />
 
+    <EditText
+        android:id="@+id/mobileET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_edit_text"
+        android:fontFamily="@font/poppins"
+        android:hint="@string/mobile_number"
+        android:imeOptions="actionNext"
+        android:inputType="phone"
+        android:maxLength="12"
+        android:paddingStart="15dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="10dp"
+        android:textColorHint="@color/gray_700" />
+
+    <EditText
+        android:id="@+id/emailET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_edit_text"
+        android:fontFamily="@font/poppins"
+        android:hint="@string/email"
+        android:imeOptions="actionDone"
+        android:inputType="textEmailAddress"
+        android:paddingStart="15dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="10dp"
+        android:textColorHint="@color/gray_700" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancelBT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight=".5"
+            android:background="@drawable/bg_orange_btn"
+            android:fontFamily="@font/poppins"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveBT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight=".5"
+            android:background="@drawable/bg_blue_btn"
+            android:fontFamily="@font/poppins"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 </LinearLayout>

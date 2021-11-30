@@ -11,4 +11,6 @@
     <string name="enter_email_id">Enter email id</string>
     <string name="enter_valid_mobile_no">Enter valid mobile number</string>
     <string name="enter_valid_email_id">Enter valid email id</string>
+    <string name="no_contacts_to_show">No contacts to show</string>
+    <string name="menu">Menu</string>
 </resources>

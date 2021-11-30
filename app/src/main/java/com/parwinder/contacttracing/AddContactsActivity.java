@@ -1,5 +1,6 @@
 package com.parwinder.contacttracing;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,12 +10,14 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class AddContactsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button saveBT, cancelBT;
     private EditText nameET, mobileNoET, emailET;
+    private ArrayList<ContactsData> contactsList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,12 +40,13 @@ public class AddContactsActivity extends AppCompatActivity implements View.OnCli
         emailET = findViewById(R.id.emailET);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.saveBT:
                 if (validInfo()) {
-                    Toast.makeText(this, "save to DB", Toast.LENGTH_SHORT).show();
+                    saveContactsToSharedPreferences();
                 }
                 break;
 
@@ -50,6 +54,20 @@ public class AddContactsActivity extends AppCompatActivity implements View.OnCli
                 finish();
                 break;
         }
+    }
+
+    private void saveContactsToSharedPreferences() {
+        ContactsData data = new ContactsData();
+        data.setName(nameET.getText().toString().trim());
+        data.setNumber(mobileNoET.getText().toString().trim());
+        data.setEmail(emailET.getText().toString().trim());
+
+        if (SharedPref.read("contacts_list") != null)
+            contactsList = SharedPref.read("contacts_list");
+        contactsList.add(data);
+        SharedPref.clear("contacts_list");
+        SharedPref.write(contactsList, "contacts_list");
+        finish();
     }
 
     private boolean validInfo() {

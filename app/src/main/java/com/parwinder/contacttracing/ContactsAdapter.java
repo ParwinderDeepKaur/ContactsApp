@@ -1,7 +1,6 @@
 package com.parwinder.contacttracing;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,10 @@ import java.util.ArrayList;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyViewHolder> {
 
-    private Context context;
-    private ArrayList contactsList;
+    private final Context context;
+    private final ArrayList<ContactsData> contactsList;
 
-    public ContactsAdapter(Context context, ArrayList contactsList) {
+    public ContactsAdapter(Context context, ArrayList<ContactsData> contactsList) {
         this.context = context;
         this.contactsList = contactsList;
     }
@@ -32,8 +31,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.nameTV.setText(contactsList.get(position).toString());
-        Log.e("", "onBindViewHolder: " + "position");
+        holder.nameTV.setText(contactsList.get(position).getName());
+        holder.emailTV.setText(contactsList.get(position).getEmail());
+        holder.numberTV.setText(contactsList.get(position).getNumber());
     }
 
     @Override
@@ -41,16 +41,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
         return contactsList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView menuIV;
-        TextView numberTV, nameTV;
+        TextView numberTV, nameTV, emailTV;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             menuIV = itemView.findViewById(R.id.menuIV);
             numberTV = itemView.findViewById(R.id.numberTV);
             nameTV = itemView.findViewById(R.id.nameTV);
+            emailTV = itemView.findViewById(R.id.emailTV);
         }
 
         @Override

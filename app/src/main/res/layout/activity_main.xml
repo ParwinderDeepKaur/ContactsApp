@@ -14,8 +14,8 @@
         android:fontFamily="@font/poppins"
         android:text="@string/no_contacts_to_show"
         android:textColor="@color/black"
-        android:textSize="24sp"
-        app:drawableTopCompat="@mipmap/ic_swipe" />
+        android:textSize="18sp"
+        app:drawableTopCompat="@drawable/ic_empty_box" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contactsRV"

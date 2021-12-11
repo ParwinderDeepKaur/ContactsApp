@@ -46,28 +46,35 @@ public class AddContactsActivity extends AppCompatActivity implements View.OnCli
         switch (view.getId()) {
             case R.id.saveBT:
                 if (validInfo()) {
-                    saveContactsToSharedPreferences();
+                    prepareData();
                 }
                 break;
 
             case R.id.cancelBT:
                 finish();
                 break;
+
+            case R.id.menuIV:
+
+                break;
         }
     }
 
-    private void saveContactsToSharedPreferences() {
+    private void prepareData() {
         ContactsData data = new ContactsData();
         data.setName(nameET.getText().toString().trim());
         data.setNumber(mobileNoET.getText().toString().trim());
         data.setEmail(emailET.getText().toString().trim());
+        saveContactsToSharedPreferences(data);
+        finish();
+    }
 
+    private void saveContactsToSharedPreferences(ContactsData data) {
         if (SharedPref.read("contacts_list") != null)
             contactsList = SharedPref.read("contacts_list");
         contactsList.add(data);
         SharedPref.clear("contacts_list");
         SharedPref.write(contactsList, "contacts_list");
-        finish();
     }
 
     private boolean validInfo() {
@@ -80,12 +87,11 @@ public class AddContactsActivity extends AppCompatActivity implements View.OnCli
         } else if (!validMobileNo(mobileNoET.getText().toString().trim())) {
             Toast.makeText(this, getString(R.string.enter_valid_mobile_no), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (emailET.getText().toString().trim().isEmpty()) {
-            Toast.makeText(this, getString(R.string.enter_email_id), Toast.LENGTH_SHORT).show();
-            return false;
-        } else if (!validEmailId(emailET.getText().toString().trim())) {
-            Toast.makeText(this, getString(R.string.enter_valid_email_id), Toast.LENGTH_SHORT).show();
-            return false;
+        } else if (!emailET.getText().toString().trim().isEmpty()) {
+            if (!validEmailId(emailET.getText().toString().trim())) {
+                Toast.makeText(this, getString(R.string.enter_valid_email_id), Toast.LENGTH_SHORT).show();
+                return false;
+            }
         }
         return true;
     }

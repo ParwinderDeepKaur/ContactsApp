@@ -8,14 +8,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyViewHolder> {
 
-    private final Context context;
-    private final ArrayList<ContactsData> contactsList;
+    Context context;
+    ArrayList<ContactsData> contactsList;
+    public OnItemClickListener clickListener;
 
     public ContactsAdapter(Context context, ArrayList<ContactsData> contactsList) {
         this.context = context;
@@ -31,9 +33,16 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.nameTV.setText(contactsList.get(position).getName());
-        holder.emailTV.setText(contactsList.get(position).getEmail());
-        holder.numberTV.setText(contactsList.get(position).getNumber());
+        if (position == 0) {
+            holder.dividerTV.setVisibility(View.VISIBLE);
+        } else {
+            if (contactsList.get(position).getName().charAt(0) != contactsList.get(position - 1).getName().charAt(0)) {
+                holder.dividerTV.setVisibility(View.VISIBLE);
+            } else {
+                holder.dividerTV.setVisibility(View.GONE);
+            }
+        }
+        holder.bind(contactsList.get(position));
     }
 
     @Override
@@ -41,10 +50,15 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
         return contactsList.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public void setClickListener(OnItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView menuIV;
-        TextView numberTV, nameTV, emailTV;
+        CardView contactCV;
+        TextView numberTV, nameTV, emailTV, dividerTV;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,11 +66,30 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
             numberTV = itemView.findViewById(R.id.numberTV);
             nameTV = itemView.findViewById(R.id.nameTV);
             emailTV = itemView.findViewById(R.id.emailTV);
+            dividerTV = itemView.findViewById(R.id.dividerTV);
+            contactCV = itemView.findViewById(R.id.contactCV);
+            itemView.setTag(itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        public void bind(ContactsData contactsData) {
+            dividerTV.setText(String.valueOf(contactsData.getName().charAt(0)));
+            nameTV.setText(contactsData.getName());
+            numberTV.setText(contactsData.getNumber());
+            if (!contactsData.getEmail().isEmpty()) {
+                emailTV.setVisibility(View.VISIBLE);
+                emailTV.setText(contactsData.getEmail());
+            } else {
+                emailTV.setVisibility(View.GONE);
+            }
         }
 
         @Override
         public void onClick(View view) {
-            menuIV.setOnClickListener(this);
+            if (clickListener != null) {
+                menuIV.setOnClickListener(view1 -> clickListener.onClick(view1, getAdapterPosition(), "MENU"));
+                contactCV.setOnClickListener(view12 -> clickListener.onClick(view12, getAdapterPosition(), "ITEM"));
+            }
         }
     }
 }

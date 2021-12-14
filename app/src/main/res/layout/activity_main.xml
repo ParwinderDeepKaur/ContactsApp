@@ -2,18 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/noDataTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/myTextViewStyle"
         android:layout_centerInParent="true"
-        android:fontFamily="@font/poppins"
         android:text="@string/no_contacts_to_show"
-        android:textColor="@color/black"
         android:textSize="18sp"
         app:drawableTopCompat="@drawable/ic_empty_box" />
 
@@ -21,7 +19,6 @@
         android:id="@+id/contactsRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_200"
         android:padding="10dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

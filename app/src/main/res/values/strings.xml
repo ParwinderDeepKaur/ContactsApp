@@ -13,6 +13,12 @@
     <string name="enter_valid_email_id">Enter valid email id</string>
     <string name="no_contacts_to_show">No contacts to show</string>
     <string name="menu">Menu</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="contact_already_exists_with_this_name">Contact already exists with this name</string>
+    <string name="are_you_sure_you_want_to_delete_it">Are you sure you want to delete?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
 
 

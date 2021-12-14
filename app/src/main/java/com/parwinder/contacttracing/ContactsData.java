@@ -1,6 +1,9 @@
 package com.parwinder.contacttracing;
 
-public class ContactsData {
+import java.io.Serializable;
+
+/*model class with private properties and public getter-setter*/
+public class ContactsData implements Serializable {
 
     private String name;
     private String number;
